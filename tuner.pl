@@ -233,7 +233,10 @@ sub denon_raw_command($$$) {
       if ($cmd2 eq 'MV') {
         my $n = $line;
         $n .= "0" if ($n =~ /^..$/);
-        $line = sprintf ("%.1f dB", (800 - $n) / -10.0);
+        if ($n =~ m/^(\d+)$/m) {        
+          $line = sprintf ("%.1f dB", (800 - $n) / -10.0);
+        } 
+        
       }
 
       if    ($cmd2 eq 'PW') { $cmd2 = 'POWER';  }
